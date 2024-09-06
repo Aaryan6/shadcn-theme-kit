@@ -18,7 +18,6 @@ export function ThemeToggle() {
   React.useEffect(() => {
     console.log({ theme });
   }, [theme]);
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

@@ -9,6 +9,16 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        inter: ["var(--font-inter)"],
+        robotoMono: ["var(--font-roboto-mono)"],
+        playfair: ["var(--font-playfair)"],
+        courierPrime: ["var(--font-courier-prime)"],
+        lora: ["var(--font-lora)"],
+        sourceSansPro: ["var(--font-source-sans-pro)"],
+        merriweather: ["var(--font-merriweather)"],
+        crimsonPro: ["var(--font-crimson-pro)"],
+      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",

@@ -1,14 +1,10 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { ThemeToggle } from "./theme-toggle";
 import { Button } from "./ui/button";
 
 export default function HeroSection() {
   return (
     <div className="min-h-screen relative overflow-hidden bg-background text-foreground">
-      {/* White spotlight effect */}
-      {/* <div className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.03)_0%,_rgba(255,255,255,0)_50%)]"></div> */}
-
       <header className="relative z-10 flex justify-between items-center p-6">
         <div className="flex items-center space-x-4">
           <svg
@@ -51,11 +47,10 @@ export default function HeroSection() {
             Book a demo
           </Button>
           <Button className="px-3 py-1.5 text-sm rounded-md">Sign in</Button>
-          <ThemeToggle />
         </div>
       </header>
-      <main className="relative z-10 flex flex-col items-center justify-center text-center px-4 py-20">
-        <div className="mb-8">
+      <main className="relative z-10 flex flex-col gap-6 items-center justify-center text-center px-4 py-20">
+        <div className="">
           <button className="bg-muted text-muted-foreground px-4 py-2 rounded-full text-sm flex items-center space-x-2 hover:bg-muted/80">
             <span className="bg-background text-foreground text-xs px-2 py-0.5 rounded-full">
               NEW
@@ -64,10 +59,10 @@ export default function HeroSection() {
             <ArrowRight className="h-4 w-4" />
           </button>
         </div>
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 max-w-4xl">
+        <h1 className="text-5xl md:text-7xl font-bold max-w-4xl">
           Build collaborative experiences faster
         </h1>
-        <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl">
+        <p className="text-lg md:text-xl text-muted-foreground max-w-3xl">
           Ship features like <span className="text-primary">Comments</span>,{" "}
           <span className="text-primary">Notifications</span>, a{" "}
           <span className="text-primary">Text Editor</span>, or build any
@@ -75,7 +70,7 @@ export default function HeroSection() {
           <span className="text-primary">Realtime APIs</span> in days, not
           months.
         </p>
-        <p className="text-xl md:text-2xl text-muted-foreground mb-12">
+        <p className="text-lg md:text-xl text-muted-foreground">
           Engage users, fuel creativity, and drive growth. Finally.
         </p>
         <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
