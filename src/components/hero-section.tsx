@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "./ui/button";
+import { cn } from "@/lib/utils";
 
 export default function HeroSection() {
   return (
@@ -49,37 +52,38 @@ export default function HeroSection() {
           <Button className="px-3 py-1.5 text-sm rounded-md">Sign in</Button>
         </div>
       </header>
-      <main className="relative z-10 flex flex-col gap-6 items-center justify-center text-center px-4 py-20">
+      <main
+        className={cn(
+          "relative z-10 flex flex-col gap-6 items-center justify-center text-center px-4 py-20 max-w-5xl mx-auto",
+          ""
+        )}
+      >
         <div className="">
           <button className="bg-muted text-muted-foreground px-4 py-2 rounded-full text-sm flex items-center space-x-2 hover:bg-muted/80">
             <span className="bg-background text-foreground text-xs px-2 py-0.5 rounded-full">
               NEW
             </span>
-            <span>Introducing Liveblocks 2.0</span>
+            <span>Introducing UIKit 2.0</span>
             <ArrowRight className="h-4 w-4" />
           </button>
         </div>
         <h1 className="text-5xl md:text-7xl font-bold max-w-4xl">
-          Build collaborative experiences faster
+          Build beautiful user interfaces faster
         </h1>
         <p className="text-lg md:text-xl text-muted-foreground max-w-3xl">
-          Ship features like <span className="text-primary">Comments</span>,{" "}
-          <span className="text-primary">Notifications</span>, a{" "}
-          <span className="text-primary">Text Editor</span>, or build any
-          collaborative experience with{" "}
-          <span className="text-primary">Realtime APIs</span> in days, not
-          months.
-        </p>
-        <p className="text-lg md:text-xl text-muted-foreground">
-          Engage users, fuel creativity, and drive growth. Finally.
+          Create stunning <span className="text-primary">Components</span>,{" "}
+          <span className="text-primary">Layouts</span>, and{" "}
+          <span className="text-primary">Animations</span> with our
+          comprehensive <span className="text-primary">UI Library</span> in
+          days, not months.
         </p>
         <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
           <Button variant={"outline"} className="">
-            Start building for free
+            Get started for free
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
           <Button className="">
-            Browse examples
+            Explore components
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
         </div>

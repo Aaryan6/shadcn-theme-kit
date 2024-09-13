@@ -2,16 +2,16 @@
 
 import * as React from "react";
 import { useFont } from "@/components/font-provider";
-import { Button } from "@/components/ui/button";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
 
 export function FontToggle() {
-  const { setFont } = useFont();
+  const { font, setFont } = useFont();
 
   const fonts = [
     { name: "Inter", value: "font-inter" },
@@ -25,24 +25,17 @@ export function FontToggle() {
   ];
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
-          Aa
-          <span className="sr-only">Toggle font</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+    <Select value={font} onValueChange={(e) => setFont(e)}>
+      <SelectTrigger className="rounded-full">
+        <SelectValue placeholder="Select a font" />
+      </SelectTrigger>
+      <SelectContent>
         {fonts.map((f) => (
-          <DropdownMenuItem
-            key={f.value}
-            className="cursor-pointer hover:bg-red-200"
-            onClick={() => setFont(f.value)}
-          >
+          <SelectItem key={f.value} value={f.value}>
             {f.name}
-          </DropdownMenuItem>
+          </SelectItem>
         ))}
-      </DropdownMenuContent>
-    </DropdownMenu>
+      </SelectContent>
+    </Select>
   );
 }

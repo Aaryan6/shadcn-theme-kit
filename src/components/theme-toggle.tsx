@@ -1,76 +1,87 @@
 "use client";
 
-import * as React from "react";
-import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { useTheme } from "next-themes";
-
-import { Button } from "@/components/ui/button";
+import { THEMES } from "./themes";
+import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
+import { applyTheme } from "@/providers/providers";
+import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
+import { useThemeStore } from "@/lib/hooks/use-theme-store";
 
 export function ThemeToggle() {
-  const { setTheme, theme } = useTheme();
+  const { theme: nextTheme } = useTheme();
+  const { theme, setTheme } = useThemeStore();
+  const [mounted, setMounted] = useState(false);
 
-  React.useEffect(() => {
-    console.log({ theme });
-  }, [theme]);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const handleThemeChange = (newThemeId: string) => {
+    const newTheme = THEMES.find((t) => t.id === newThemeId);
+    if (newTheme) {
+      setTheme(newTheme);
+      const isDark = nextTheme === "dark";
+      applyTheme(newTheme.id, isDark);
+    }
+  };
+
+  if (!mounted) {
+    return null;
+  }
+
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
-          <SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <MoonIcon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem
-          className="cursor-pointer hover:bg-red-200"
-          onClick={() => setTheme("theme-modern")}
-        >
-          Modern Light
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          className="cursor-pointer hover:bg-red-200"
-          onClick={() => setTheme("theme-modern-dark")}
-        >
-          Modern Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          className="cursor-pointer hover:bg-red-200"
-          onClick={() => setTheme("theme-retro")}
-        >
-          Retro Light
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          className="cursor-pointer hover:bg-red-200"
-          onClick={() => setTheme("theme-retro-dark")}
-        >
-          Retro Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          className="cursor-pointer hover:bg-red-200"
-          onClick={() => setTheme("theme-nature")}
-        >
-          Nature Light
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          className="cursor-pointer hover:bg-red-200"
-          onClick={() => setTheme("theme-nature-dark")}
-        >
-          Nature Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          className="cursor-pointer hover:bg-red-200"
-          onClick={() => setTheme("system")}
-        >
-          System
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <Select value={theme.id} onValueChange={handleThemeChange}>
+      <SelectTrigger className="rounded-full">
+        <SelectValue placeholder="Select a theme" />
+      </SelectTrigger>
+      <SelectContent>
+        {THEMES.map((t) => (
+          <SelectItem key={t.id} value={t.id}>
+            {t.name}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
   );
 }
+
+export const ModeToggle = () => {
+  const { theme: nextTheme, setTheme: setNextTheme } = useTheme();
+  const { theme, setTheme } = useThemeStore();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
+  const toggleTheme = (mode: "light" | "dark") => {
+    setNextTheme(mode);
+    const isDark = mode === "dark";
+    applyTheme(theme.id, isDark);
+  };
+
+  return (
+    <Button
+      variant="outline"
+      size="icon"
+      onClick={() => toggleTheme(nextTheme === "dark" ? "light" : "dark")}
+      className="rounded-full w-fit p-3"
+    >
+      <SunIcon className="h-4 w-4 transition-all dark:hidden" />
+      <MoonIcon className="h-4 w-4 transition-all hidden dark:block" />
+      <span className="sr-only">Toggle theme</span>
+    </Button>
+  );
+};

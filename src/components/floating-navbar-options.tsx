@@ -2,7 +2,7 @@
 
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import { motion } from "framer-motion";
-import { ThemeToggle } from "./theme-toggle";
+import { ModeToggle, ThemeToggle } from "./theme-toggle";
 import { FontToggle } from "./font-toggle";
 export function FloatingOptionsBar() {
   return (
@@ -17,6 +17,7 @@ export function FloatingOptionsBar() {
       <div className="flex items-center space-x-4">
         <ThemeToggle />
         <FontToggle />
+        <ModeToggle />
         <motion.a
           href="https://github.com"
           target="_blank"
